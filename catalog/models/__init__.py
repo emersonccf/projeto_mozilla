@@ -15,3 +15,4 @@ from .genre import Genre
 from .book import Book
 from .bookinstance import BookInstance
 from .author import Author
+from .language import Language
