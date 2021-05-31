@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>DADOS DA MINHA BIBLIOTECA</title>{% endblock %}
+
+{% block content %}
+  <h1>Biblioteca Local - Home</h1>
+  <p>Seja bem-vindo à LocalLibrary, um website desenvolvido por <em>Emerson Ferreira</em>!</p>
+  <h2>Conteúdo Dinâmico</h2>
+  <p>A biblioteca tem as seguintes contagens de registros:</p>
+  <ul>
+    <li><strong>Livros:</strong> {{ num_books }}</li>
+    <li><strong>Exemplares:</strong> {{ num_instances }}</li>
+    <li><strong>Exemplares Disponíveis:</strong> {{ num_instances_available }}</li>
+    <li><strong>Autores:</strong> {{ num_authors }}</li>
+    <li><strong>Generos:</strong> {{ num_genre }}</li>
+    <li><strong>Com a palavra Django no título:</strong> {{ num_title_django }}</li>
+  </ul>
+{% endblock %}
