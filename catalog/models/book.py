@@ -51,7 +51,8 @@ class Book(models.Model):
     def get_absolute_url(self):
         """ Retona uma url para acesso aos detalhes do registro de um livro específico """
         # book-datail deve ser um nome associado a uma uls criada associada a uma view e seu respectivo template
-        return reverse("book-detail", args=[str(self.id)])
+        # return reverse("book-detail", args=[str(self.id)])
+        return reverse("book-detail", kwargs={"pk": self.pk})
     
     def display_genre(self):
         """ Cria uma string para Gênero - Isto é requerido no display da classe BookAdmin em admin.py
@@ -59,7 +60,7 @@ class Book(models.Model):
         não é recomendado pelo custo computacional de acesso ao BD só para 
         exemplificar que é possível """
         return ", ".join(genre.name for genre in self.genre.all()[:3])
-
+    
     # nome que irá aparece como titulo da coluna no admin, se omitido aparece o nome da função como título
     display_genre.short_description = "Gênero" 
     

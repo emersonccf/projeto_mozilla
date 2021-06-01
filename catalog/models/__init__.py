@@ -6,7 +6,7 @@ import uuid # Utilizado em BookIstance
 
 LOAN_STATUS = (
     ('m', 'Manutenção'),
-    ('e', 'Emrestado'),
+    ('e', 'Emprestado'),
     ('d', 'Disponível'),
     ('r', 'Reservado'),
 )
