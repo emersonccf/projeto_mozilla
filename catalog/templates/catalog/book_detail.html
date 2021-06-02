@@ -1,28 +1,31 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
-    <h1>Título: {{ book.title }}</h1>
+    <h1 class="display-4">Título: {{ book.title }}</h1>
 
-<p><stronge>Autor:</stronge> <a href=""> {{ book.author }} </a></p>
-<p><stronge>Resumo:</stronge> {{ book.summary }} </p>
-<p><stronge>ISBN:</stronge> {{ book.isbn }} </p>
-<p><stronge>Idioma:</stronge> {{ book.language }} </p>
-<p><stronge>Genero:</stronge> {% for genre in book.genre.all %} {{ genre }} 
+<p><strong>Autor:</strong> <a href=""> {{ book.author }} </a></p>
+<p class="lead"><strong>Resumo:</strong> {{ book.summary }} </p>
+<p><strong>ISBN:</strong> {{ book.isbn }} </p>
+<p><strong>Idioma:</strong> {{ book.language }} </p>
+<p><strong>Genero:</strong> {% for genre in book.genre.all %} {{ genre }} 
                                 {% if not forloop.last %}, {% endif %} 
                               {% endfor %}</p>
 
 <div style="margin-left: 20px; margin-top: 20px">
 <h4> Exemplares </h4>
+<hr>
     {% for copy in book.bookinstance_set.all %}
-        <p class=" {% if copy.status == 'd' %} text-success 
-                        {% elif copy.status == 'm' %} text-danger
-                        {% else %} text-warnig"> {{ copy.get_status_display }}</p>
-                   {% endif %}
+        <p class=" {% if copy.status == 'd' %} badge badge-success 
+                        {% elif copy.status == 'm' %} badge badge-danger
+                        {% else %} badge badge-warning 
+                    {% endif %}"> {{ copy.get_status_display }} </p>
+                   
         {% if copy.status != 'd' %} 
-            <p><stronge>Data de Retono:<stronge> {{ copy.due_back }}</p>
+            <p><strong>Data de Retono:</strong> {{ copy.due_back }}</p>
         {% endif %}
-        <p><stronge>Edição:</stronge> {{ copy.imprint  }}</p>
-        <p class="text-muted"><stronge>Id:</stronge> {{ copy.id }}</p>
-    {% endfor %}
+        <p><strong>Edição:</strong> {{ copy.imprint  }}</p>
+        <p class="text-muted"><strong>Id:</strong> {{ copy.id }}</p>
+        <hr>
+        {% endfor %}
 </div>
 {% endblock content %}
