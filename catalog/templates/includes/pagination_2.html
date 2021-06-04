@@ -1,0 +1,45 @@
+{% block pagination %} <!-- Estudar como fazer paginacao e colocar o modelo do bootstrap aqui -->
+    {% if is_paginated %}
+    <nav aria-label="...">
+        <ul class="pagination justify-content-end">
+            <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                <a class="page-link" 
+                    {% if page_obj.has_previous %}
+                        href="{{ request.path }}?page={{ page_obj.previous_page_number }}"
+                    {% else %}
+                        href="#"
+                    {% endif %} 
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+            </li> 
+            {% for pag in page_obj.paginator.page_range %}
+                <li class="page-item {% if pag == page_obj.number %} active {% endif %}">
+                    <a class="page-link" 
+                        {% if pag != page_obj.number %}
+                            href="{{ request.path }}?page={{ pag }}">{{ pag }}
+                        {% else %}
+                            href="#">{{ pag }} <!-- evita que a pagina já carregada fique sebndo chamada-->
+                        {% endif %}
+                        {% if pag == page_obj.number %} 
+                            <span class="sr-only">(current)</span> 
+                        {% endif %}
+                    </a>
+                </li>
+            {% endfor %}
+            <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}"> 
+                <a class="page-link" 
+                    {% if page_obj.has_next %}
+                        href="{{ request.path }}?page={{ page_obj.next_page_number }}"
+                    {% else %}
+                        href="#"
+                    {% endif %} 
+                    aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Próximo</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    {% endif %}
+{% endblock %}

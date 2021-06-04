@@ -5,7 +5,7 @@ from catalog.models import *
 
 class BookListView(ListView):
     model = Book # informa a que model a view está vinculada
-    paginate_by = 2 #informa a quantidade e livros por página na listagem do site
+    paginate_by = 3 # informa a quantidade e livros por página na listagem do site
     
     # custumização abaixo é opicional dentro da necessidade de cada view
     """ context_object_name = 'my_book_list' # seu próprio nome para a lista como uma variável de modelo 

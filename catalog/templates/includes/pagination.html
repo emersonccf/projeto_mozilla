@@ -1,0 +1,28 @@
+{% block pagination %} <!-- Estudar como fazer paginacao e colocar o modelo do bootstrap aqui -->
+    {% if is_paginated %}
+        <div class="pagination justify-content-center">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">[Anterior] </a>
+                {% else %}
+                    <span>[Anterior] </span>
+                {% endif %}
+                <span class="page-current">
+                    {% for pag  in page_obj.paginator.page_range %}
+                        {% if  page_obj.number != pag  %}
+                            <a href="{{ request.path }}?page={{ pag }}"> [{{pag}}] </a>
+                        {% else %}
+                            <span> [{{pag}}] </span>
+                        {% endif %}
+                    {% endfor %}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="{{ request.path }}?page={{ page_obj.next_page_number }}"> [Próxima]</a>
+                {% else %}
+                    <span> [Próxima]</span>
+                {% endif %}
+                <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+            </span>
+        </div>
+    {% endif %}
+{% endblock %}
