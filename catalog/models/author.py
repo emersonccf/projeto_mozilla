@@ -32,4 +32,4 @@ class Author(models.Model):
 
     def get_absolute_url(self):
         """ Retorna o url para acessar uma instância particular do autor """
-        return reverse("author-detail", args=[str(self.id)])
+        return reverse("author-detail", kwargs={"pk": self.pk})

@@ -3,14 +3,37 @@
 {% block content %}
     <h1 class="display-4">Lista de Livros</h1>
     {% if book_list %}
-    <ul class="list-group">
+    <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Título</th>
+      <th scope="col">Sobrenome</th>
+      <th scope="col">Nome</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book in book_list %}
+        <tr>
+            <th scope="row">{{ book.id }}</th>
+            <td><a href="{{ book.get_absolute_url }}" >{{ book.title }}</a></td>
+            <td>{{ book.author.last_name.upper }}</td>
+            <td>{{ book.author.first_name }}</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+    
+    
+    
+    {% comment %} <ul class="list-group">
         {% for book in book_list %}
             <li class="list-group-item">
                 <a href="{{ book.get_absolute_url }}" >{{ book.title }}</a> 
                 ({{ book.author.last_name.upper }}, {{  book.author.first_name }}) 
             </li>
         {% endfor %}
-    </ul> 
+    </ul> {% endcomment %} 
     {% else %}
         <p><b>Não existem livros na biblioteca</b></p> 
     {% endif %}

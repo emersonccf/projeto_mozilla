@@ -1,0 +1,31 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <h1 class="display-4">Lista de Livros</h1>
+    {% if author_list %}
+    <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Sobrenome</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Dt. Nasc. / Dt. Morte</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for author in author_list %}
+        <tr>
+            <th scope="row">{{ author.id }}</th>
+            <td><a href="{{ author.get_absolute_url }}" >{{ author.last_name.upper }}</a></td>
+            <td>{{ author.first_name }}</td>
+            <td>({{ author.date_of_birth }} - {{ author.date_of_death }})</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+    {% else %}
+        <p><b>Não existem autores a serem exibidos</b></p> 
+    {% endif %}
+{% endblock content %}
+
+

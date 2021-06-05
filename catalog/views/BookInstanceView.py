@@ -1,6 +1,4 @@
-from catalog.models import *
 from django.views.generic import DetailView
-
 
 from catalog.models import *
 
