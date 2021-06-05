@@ -3,15 +3,17 @@
 {% block content %}
     <h1 class="display-4">Autor: {{ author.last_name.upper }}, {{ author.first_name }}</h1>
 
-<p><strong>Data Nascimento:</strong> xxx </p>
-<p><strong>Data Falecimento:</strong> xxx </p>
+<div style="margin-left: 20px; margin-top: 20px">
+    <p><strong>Data Nascimento:</strong> {{ author.date_of_birth }} </p>
+    <p><strong>Data Falecimento:</strong> {{ author.date_of_death }} </p>
 
-<h4> Livros </h4>
-<hr>
-    {% for book in author.book_set.all %}
-        <p><strong>Título: </strong><a href="{{ book.get_absolute_url }}" >{{ book.title }}</a></p>
-        <p class="text-muted"><strong>Id:</strong> {{ book.id }}</p>
-        <hr>
-        {% endfor %}
+    <h4> Livros </h4>
+    <hr>
+        {% for book in author.book_set.all %}
+            <p><a href="{{ book.get_absolute_url }}" >{{ book.title }}</a>  
+                                        - ({{ book.bookinstance_set.all.count }}) </p>
+            <p>{{ book.summary }} </p>
+            <hr>
+            {% endfor %}
 </div>
 {% endblock content %}
