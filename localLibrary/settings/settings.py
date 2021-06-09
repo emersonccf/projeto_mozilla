@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'catalog.apps.CatalogConfig', #app
+    'catalog.apps.CatalogConfig',  # app
 ]
 
 MIDDLEWARE = [
@@ -50,17 +50,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'localLibrary.urls'
 
-# define o caminho para os templates dentro de cada App - raiz onde ficam o Projeto e os Apps 
+# define o caminho para os templates dentro de cada App - raiz onde ficam o Projeto e os Apps
 SETTINGS_TEMPLATES = Path(__file__).resolve().parent.parent.parent
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ 
+        'DIRS': [
             # une a raiz com nome_app e a pasta de templates, o path fica: /catalog/template/catalog
             # o ultimo <catalog> é o próprio Django que adciona por padrão para qualquer caminho informado
             # por padrão, mesmo sem informar este caminha é nesta árvore de pastas que ele busca os templates
-            # o base_generic.html e o index.html ele busca em: /catalog/template   
+            # o base_generic.html e o index.html ele busca em: /catalog/template
             Path.joinpath(SETTINGS_TEMPLATES, 'catalog', 'templates'),
         ],
         'APP_DIRS': True,
@@ -123,3 +123,8 @@ MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Define o controle de sessão - periodo que o usuário pode permanecer logado
+SESSION_COOKIE_AGE = 1800  # segundos - equivale 30 minutos
+# reinicia a contagem do tempo caso o usuario volte a utilizar o sistema
+SESSION_SAVE_EVERY_REQUEST = True

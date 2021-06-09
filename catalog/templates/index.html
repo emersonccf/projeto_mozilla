@@ -15,4 +15,5 @@
     <li><strong>Generos:</strong> {{ num_genre }}</li>
     <li><strong>Com a palavra Django no título:</strong> {{ num_title_django }}</li>
   </ul>
+  <p>Você visitou esta página <strong>{{ num_visits }} {% if num_visits == 1 %} vez {% else %} vezes{% endif %} </strong>.</p>
 {% endblock %}
