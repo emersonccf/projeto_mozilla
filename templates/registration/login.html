@@ -2,14 +2,14 @@
 {% block content %}
     <div class="text-center">
         {% if form.errors %}
-            {% include "includes/alert_f1.html" %}
+            {% include "includes/alert_f1.html" %} <!-- erro user e senha -->
         {% endif %}
 
         {% if next %}
             {% if user.is_authenticated %}
-                {% include "includes/alert_f2.html" %}
+                {% include "includes/alert_f2.html" %} <!-- erro não acesso a pagina -->
             {% else %}
-                {% include "includes/alert_f3.html" %}
+                {% include "includes/alert_f3.html" %} <!-- para acessar fazer login -->
             {% endif %}
         {% endif %}
 
