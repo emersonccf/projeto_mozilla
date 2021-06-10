@@ -22,9 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)#r-sct=a_hi)i)36siwzfni=7wndh*i+xw^&br#^_u3l7u$+&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -50,18 +50,24 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'localLibrary.urls'
 
-# define o caminho para os templates dentro de cada App - raiz onde ficam o Projeto e os Apps
+# define o caminho para os templates dentro de cada App - raiz onde ficam o
+# Projeto e os Apps
 SETTINGS_TEMPLATES = Path(__file__).resolve().parent.parent.parent
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            # une a raiz com nome_app e a pasta de templates, o path fica: /catalog/template/catalog
-            # o ultimo <catalog> é o próprio Django que adciona por padrão para qualquer caminho informado
-            # por padrão, mesmo sem informar este caminha é nesta árvore de pastas que ele busca os templates
-            # o base_generic.html e o index.html ele busca em: /catalog/template
+            # une a raiz com nome_app e a pasta de templates, o path fica:
+            # /catalog/template/catalog
+            # o ultimo <catalog> é o próprio Django que adciona por padrão
+            # para qualquer caminho informado
+            # por padrão, mesmo sem informar este caminho é nesta árvore de
+            # pastas que ele busca os templates
+            # o base_generic.html e o index.html ele busca em:
+            # /catalog/template
             Path.joinpath(SETTINGS_TEMPLATES, 'catalog', 'templates'),
+            Path.joinpath(SETTINGS_TEMPLATES, 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -109,12 +115,17 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+# define locais opicionais onde buscar arquivos estáticos  VERIFAR ISSO DEPOIS
+STATICFILES_DIRS = [
+    "/templates",
+]
+
 STATIC_URL = '/static/'
 STATIC_ROOT = Path.joinpath(BASE_DIR, 'static')
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media')
@@ -128,3 +139,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SESSION_COOKIE_AGE = 1800  # segundos - equivale 30 minutos
 # reinicia a contagem do tempo caso o usuario volte a utilizar o sistema
 SESSION_SAVE_EVERY_REQUEST = True
+
+# Define que ao fazer o login ao invés de ir para uma página de perfil vá para
+# a página raiz do site
+LOGIN_REDIRECT_URL = '/'

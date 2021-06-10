@@ -15,14 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.urls.conf import include #new1
-from django.views.generic import RedirectView #new2
-from django.conf import settings #new3
-from django.conf.urls.static import static #new3
+from django.urls.conf import include  # new1
+from django.views.generic import RedirectView  # new2
+from django.conf import settings  # new3
+from django.conf.urls.static import static  # new3
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('catalog/', include('catalog.urls')), #new1
-    path('', RedirectView.as_view(url='/catalog/')), #new2
-] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT) #new3
+    path('catalog/', include('catalog.urls')),  # new1
+    path('', RedirectView.as_view(url='/catalog/')),  # new2
+    # utlizando a estrutura do Django para fazer o login
+    path('accounts/', include('django.contrib.auth.urls')),  # tut.p8
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  # new3

@@ -23,11 +23,11 @@
         {% block content %}{% endblock %}
         {% include "includes/pagination_2.html" %}
         <!-- inclui uma pagina html na pisção especificada -->
-        <div class="col-sm-10 ">
+        {% comment %} <div class="col-sm-10 ">
           <!-- exemplo de como carregar uma imagem -->
           {% load static %}
           <img src="{% static 'img/basic-django.png' %}" alt="MVT Django" style="width:555px;height:540px;">
-        </div>
+        </div> {% endcomment %}
       </div>
     </div>
   </div>
