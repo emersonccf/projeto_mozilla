@@ -29,6 +29,7 @@ SECRET_KEY = 'django-insecure-)#r-sct=a_hi)i)36siwzfni=7wndh*i+xw^&br#^_u3l7u$+&
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions',  # para realizar importes no shell
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -143,3 +144,11 @@ SESSION_SAVE_EVERY_REQUEST = True
 # Define que ao fazer o login ao invés de ir para uma página de perfil vá para
 # a página raiz do site
 LOGIN_REDIRECT_URL = '/'
+
+# URL para onde o usuário é redirecionado quando determinada página necessita
+# de autenticação por login e senha
+LOGIN_URL = '/accounts/login/'
+
+# Permite testar o envio de e-mail no ambiente de desenvolvimento,
+# enviando mensagens para o console do Django
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
