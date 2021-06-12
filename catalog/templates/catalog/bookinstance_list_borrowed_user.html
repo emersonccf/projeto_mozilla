@@ -1,0 +1,29 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h1 class="display-4">Livros emprestados</h1>
+{% if bookinstance_list %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Título</th>
+            <th scope="col">Data Devolução</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for bookinstance in bookinstance_list %}
+        <tr class="{% if bookinstance.is_overdue %}table-danger{% endif %}">
+            <td><a href="{% url 'book-detail' bookinstance.book.pk %}">
+                    {{ bookinstance.book.title }}</a></td>
+            <td>{{bookinstance.due_back}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-primary" role="alert">
+    Não há livros emprestados.
+</div>
+{% endif %}
+{% endblock content %}
