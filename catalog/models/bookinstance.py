@@ -47,6 +47,11 @@ class BookInstance(models.Model):
         ordering = ['due_back']
         verbose_name = "Exemplar"
         verbose_name_plural = "Exemplares"
+        permissions = (
+            # p.8 - implantação de permições específicas
+            # utilizar decorador na função ou herança em classes
+            ("can_mark_returned", "Definir livro como devolvido"),
+        )
 
     def __str__(self):
         """ String que representa um exemplar do livro """

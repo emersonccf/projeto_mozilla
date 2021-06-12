@@ -7,6 +7,7 @@ from catalog.views.BookView import BookListView
 from catalog.views.AuthorView import AuthorListView
 from catalog.views.AuthorDtView import AuthorDetailView
 from catalog.views.LoanView import LoanedBooksByUserListView
+from catalog.views.AllBrorrowedView import AllBorrowedBooksView  # desafio
 
 # Desafio para Exp. Reg. # r'^book/(?P<ano>\d{4})/(?P<mes>\d{2})/(?P<dia>\d{2})$'
 
@@ -21,4 +22,5 @@ urlpatterns = [
     path('autors/', AuthorListView.as_view(), name='author'),
     path('autors/<int:pk>', AuthorDetailView.as_view(), name='author-detail'),
     path('mybooks/', LoanedBooksByUserListView.as_view(), name='my-borrowed'),
+    path('allborrowed/', AllBorrowedBooksView.as_view(), name='all-borrowed'),
 ]
