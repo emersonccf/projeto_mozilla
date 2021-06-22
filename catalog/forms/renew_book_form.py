@@ -9,9 +9,14 @@ from django.utils.translation import ugettext_lazy as _ """
 class RenewBookForm(forms.Form):
     renewal_date = forms.DateField(
         help_text="Informe uma data entre agora e 28 dias (padão 21 dias).",
-        input_formats="MM/DD/YYYY",
         label="Nova data de devolução do livro",
     )
+
+    """Uma das formas de validar um campo no formulário através do metodo
+    clean_nome_do_campo_do_form_que_se_deseja_validar(self). Neste metodo do
+    formulário será definidas as condições para que o campo seja considerado
+    válido ou não
+    """
 
     def clean_renewal_date(self):
         data = self.cleaned_data['renewal_date']

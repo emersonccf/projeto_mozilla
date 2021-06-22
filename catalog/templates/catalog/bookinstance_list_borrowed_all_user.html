@@ -1,31 +1,36 @@
-{% extends 'base_generic.html' %}
-
-{% block content %}
+{% extends 'base_generic.html' %} {% block content %}
 <h1 class="display-4">Todos os livros emprestados</h1>
 {% if bookinstance_list %}
 
 <table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Título</th>
-            <th scope="col">Data Devolução</th>
-            <th scope="col">Usuário</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for bookinstance in bookinstance_list %}
-        <tr class="{% if bookinstance.is_overdue %}table-danger{% endif %}">
-            <td><a href="{% url 'book-detail' bookinstance.book.pk %}">
-                    {{ bookinstance.book.title }}</a></td>
-            <td>{{bookinstance.due_back}}</td>
-            <td>{{bookinstance.borrower.username.title}}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+  <thead>
+    <tr>
+      <th scope="col">Título</th>
+      <th scope="col">Data Devolução</th>
+      <th scope="col">Usuário</th>
+      <th scope="col">Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for bookinstance in bookinstance_list %}
+    <tr class="{% if bookinstance.is_overdue %}table-danger{% endif %}">
+      <td>
+        <a href="{% url 'book-detail' bookinstance.book.pk %}">
+          {{ bookinstance.book.title }}
+        </a>
+      </td>
+      <td>{{bookinstance.due_back}}</td>
+      <td>{{bookinstance.borrower.username.title}}</td>
+      <td>
+        {% if perms.catalog.can_mark_returned %}
+        <a href="{% url 'renew-book-librarian' bookinstance.id %}"
+          class="btn btn-sm btn-success">Renovar</a>{%endif %}
+        <!--  -->
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 {% else %}
-<div class="alert alert-primary" role="alert">
-    Não há livros emprestados.
-</div>
-{% endif %}
-{% endblock content %}
+<div class="alert alert-primary" role="alert">Não há livros emprestados.</div>
+{% endif %} {% endblock content %}

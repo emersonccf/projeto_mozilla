@@ -22,9 +22,9 @@ urlpatterns = [
     # re_path(r'^books/(?P<pk>\d+)$', BookListView.as_view(), name='book-detail'),
     path('books/<int:pk>', BookDetailView.as_view(), name='book-detail'),
     path('autors/', AuthorListView.as_view(), name='author'),
-    path('autors/<int:pk>', AuthorDetailView.as_view(), name='author-detail'),
+    path('autors/<int:pk>/', AuthorDetailView.as_view(), name='author-detail'),
     path('mybooks/', LoanedBooksByUserListView.as_view(), name='my-borrowed'),
     path('allborrowed/', AllBorrowedBooksView.as_view(), name='all-borrowed'),
-    path('book/<uuid:pk>/renew', renew_book_librarian,
+    path('book/<uuid:pk>/renew/', renew_book_librarian,
          name='renew-book-librarian'),  # etapa 9
 ]

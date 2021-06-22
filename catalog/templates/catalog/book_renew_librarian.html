@@ -1,0 +1,62 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <h1 class="display-4">Renovação: {{ book_instance.book.title }}</h1>
+
+    <div style="margin-left: 20px; margin-top: 20px">
+            <p><strong>Mutuário (usuário):</strong> {{ book_instance.borrower.first_name }} </p>
+            {% if book_instance.is_overdue %} <div class="alert alert-danger alert-dismissible fade show mx-auto" role="alert"
+                style="margin-top: 10px;">
+                <strong>Atenção!</strong> Data de devolução estrapolada: {{ book_instance.due_back }}.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> {% endif %}
+
+            {% comment %} <p{% if book_instance.is_overdue %} class="text-danger" {% endif %}>
+            Data de devolução: {{ book_instance.due_back }}
+            </p> {% endcomment %}
+
+            <form method="POST" action="">
+                {% csrf_token %}
+                <table>
+                    {% comment %} {{ form.as_table }} {% endcomment %} <!--Esta variável cria uma estrutura 
+                    de linhas e colunas na tabela para renderizar os campos de 
+                    definidos no forms.py que foi geradada uma instancia na
+                    views book_intância (chamada de form) e passada pelo 
+                    contexto (um dicionario context) para este template onde 
+                    ele será renderizado 
+                    Para renderizar como itens de uma lista: form.as_ul 
+                    Para renderizar como paragrafos: form.as_ul
+                    Também é possivel renderizar os campos dos formulário de
+                    forma manual:
+                        form.nome_do_campo;
+                        form.nome_do_campo.errors - lista de erros;
+                        form.nome_do_campo.id_for_label - id do label.
+                        form.nome_do_campo.help_text - texto de ajuda
+                    Para maiores detalhes de como renderizar campos de forma
+                    manual consultar: https://docs.djangoproject.com/en/3.2/topics/forms/#rendering-fields-manually 
+                    -->
+                    {% if form.renewal_date.errors %} <div class="alert alert-danger alert-dismissible fade show mx-auto" role="alert"
+                        style="margin-top: 10px;">
+                        <strong>Atenção!</strong>{{ form.renewal_date.errors }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div> {% endif %}
+                    
+                    <tr>
+                        <td style="vertical-align: middle;"><label for="{{ form.renewal_date.id_for_label }}">Data Renovação:</label></td>
+                        <td>
+                            {{ form.renewal_date }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><span class="helptext">{{ form.renewal_date.help_text }}</span></td>
+                    </tr>
+                </table>
+                <input type="submit" value="Alterar" class="btn btn-lg btn-primary">
+            </form>
+    </div>
+{% endblock content %}
