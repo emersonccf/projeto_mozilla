@@ -10,6 +10,10 @@
       <th scope="col">Sobrenome</th>
       <th scope="col">Nome</th>
       <th scope="col">Dt. Nasc. / Dt. Morte</th>
+      {% if perms.catalog.can_mark_returned %}
+        <th scope="col"></th>
+        <th scope="col"></th>
+      {% endif %}
     </tr>
   </thead>
   <tbody>
@@ -19,6 +23,10 @@
             <td><a href="{{ author.get_absolute_url }}" >{{ author.last_name.upper }}</a></td>
             <td>{{ author.first_name }}</td>
             <td>({{ author.date_of_birth }} - {{ author.date_of_death }})</td>
+            {% if perms.catalog.can_mark_returned %}
+              <td><a class="btn btn-sm btn-primary" href=" {% url 'author_update' author.id %} ">Alterar</a></td>
+              <td><a class="btn btn-sm btn-danger" href=" {% url 'author_delete' author.id %} ">Exluir</a></td>
+            {% endif %}
         </tr>
     {% endfor %}
   </tbody>
@@ -26,6 +34,9 @@
     {% else %}
         <p><b>Não existem autores a serem exibidos</b></p> 
     {% endif %}
+  {% if perms.catalog.can_mark_returned %}
+    <a class="btn btn-xs btn-success" href="{% url 'author_create' %}">Incluir Autor</a>
+  {% endif %}
 {% endblock content %}
 
 

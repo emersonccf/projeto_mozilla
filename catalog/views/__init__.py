@@ -5,3 +5,5 @@ from .AuthorView import *
 from .AuthorDtView import *
 from .LoanView import *
 from .AllBrorrowedView import *
+from .AuthorCrudView import *
+from .BookCrudView import *

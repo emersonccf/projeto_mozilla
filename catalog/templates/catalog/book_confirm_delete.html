@@ -1,0 +1,10 @@
+{% extends 'base_generic.html' %}
+{% block content %}
+    <h1 class="display-4" style="color: red;">Deletar Livro</h1>
+    <p>Voçê realmente deseja apagar o autor: <strong> {{ book }} </strong>?</p>
+        <form action="" method="post">
+        {% csrf_token %}
+            <input class="btn btn-xs btn-primary" type="submit" value="Excluir Livro">
+            <a class="btn btn-xs btn-danger" href=" {% url 'books' %} ">Cancelar</a>
+    </form>
+{% endblock content %}

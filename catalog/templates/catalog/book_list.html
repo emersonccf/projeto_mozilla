@@ -10,6 +10,10 @@
       <th scope="col">Título</th>
       <th scope="col">Sobrenome</th>
       <th scope="col">Nome</th>
+      {% if perms.catalog.can_mark_returned %}
+        <th scope="col"></th>
+        <th scope="col"></th>
+      {% endif %}
     </tr>
   </thead>
   <tbody>
@@ -19,6 +23,10 @@
             <td><a href="{{ book.get_absolute_url }}" >{{ book.title }}</a></td>
             <td>{{ book.author.last_name.upper }}</td>
             <td>{{ book.author.first_name }}</td>
+            {% if perms.catalog.can_mark_returned %}
+              <td><a class="btn btn-sm btn-primary" href=" {% url 'book_update' book.id %} ">Alterar</a></td>
+              <td><a class="btn btn-sm btn-danger" href=" {% url 'book_delete' book.id %} ">Exluir</a></td>
+            {% endif %}
         </tr>
     {% endfor %}
   </tbody>
@@ -33,6 +41,9 @@
     </ul> {% endcomment %} 
     {% else %}
         <p><b>Não existem livros na biblioteca</b></p> 
+    {% endif %}
+    {% if perms.catalog.can_mark_returned %}
+      <a class="btn btn-xs btn-success" href="{% url 'book_create' %}">Incluir Livro</a>
     {% endif %}
 {% endblock content %}
 

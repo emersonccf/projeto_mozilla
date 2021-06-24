@@ -1,0 +1,26 @@
+<!--
+    Nome do template é definido por padão como:
+        nome-do-model seguido o sufixo  _form mais .html, ficando assim:
+        author_form.html, por padrão tanto para criação como para alteração.
+-->
+{% extends 'base_generic.html' %}
+{% block content %}
+    {% if author.id %} <!-- Se tem id é pq já existe então é alteração -->
+        <h1 class="display-4" style="color: blue;">Alteração de Autor</h1>
+    {% else %}
+        <h1 class="display-4" style="color: green;">Inclusão de Autor</h1>
+    {% endif %}
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+                {% if author.id %} <!-- Se tem id é pq já existe então é alteração -->
+                    <input class="btn btn-xs btn-primary" type="submit" value="Alterar">
+                {% else %}
+                    <input class="btn btn-xs btn-primary" type="submit" value="Incluir">
+                {% endif %}
+            <a class="btn btn-xs btn-danger" href=" {% url 'author' %} ">Cancelar</a>
+    </form>
+{% endblock content %}
